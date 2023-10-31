@@ -39,7 +39,6 @@ public class Createtest {
         Thread.sleep(2000);
         clickButton(driver,driver.findElement(By.xpath("//a[contains(text(),'Tests')]")) ,  Duration.ofSeconds(20));
 
-        // sendKeys(driver, driver.findElement(By.xpath("//input[@id='input-search-header']")), Duration.ofSeconds(10), "gmgm");
         clickButton(driver,driver.findElement(By.xpath("//body/div[9]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/button[1]")) ,  Duration.ofSeconds(10));
         sendKeys(driver, driver.findElement(By.xpath("//input[@id='newQuizTitle']")),   Duration.ofSeconds(10), "iwriteBug free code");
         clickButton(driver,  driver.findElement(By.xpath("//a[contains(text(),'Create')]")), Duration.ofSeconds(10));
@@ -97,7 +96,7 @@ public class Createtest {
         clickButton(driver,  driver.findElement(By.xpath(" //button[@type='button'][normalize-space()='save']")), Duration.ofSeconds(10));    
         Thread.sleep(2000);
         clickButton(driver,  driver.findElement(By.xpath("//a[contains(text(),'+ create new section')]")), Duration.ofSeconds(10));
-        //a[normalize-space()='+ create new section']
+
     }
 
     static void sendKeys(WebDriver driver, WebElement element, Duration time, String value) {
