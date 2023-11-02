@@ -1,5 +1,5 @@
 import functions.*;
-
+import Addquestions.*;
 // import java.time.Duration;
 // import java.util.List;
 
@@ -17,13 +17,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class Main {
     static WebDriver driver=new ChromeDriver();
     public static void main(String[] args) throws InterruptedException {
+        
         Login.login(driver);
-        int i=0;
-        while(i<5)
-        {      
-              Deletetest.delete(driver);
-              i++;
-        }
+        // int i=0;
+        // while(i<5)
+        // {      
+        //       Deletetest.delete(driver);
+        //       i++;
+        // }
+        Createtest.create(driver,"auto test");
+        System.out.println(driver.getCurrentUrl());
+        String questionurl=driver.getCurrentUrl();
+        // Acctomarks.Addbymarks(driver, questionurl);
+        Codequotient.Addquestions(driver, questionurl);
     }
     
 }

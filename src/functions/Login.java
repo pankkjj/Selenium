@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 
 public class Login {
     public static void login(WebDriver driver) {
-          System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver-win64\\chromedriver.exe");
       
         driver.manage().window().maximize();
         driver.get("https://cqtestga.com/login");
@@ -20,7 +19,6 @@ public class Login {
         driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
         
         String currentUrl = driver.getCurrentUrl();
-        System.out.println(currentUrl);
         if (currentUrl.equals("https://cqtestga.com/login")) {
             WebElement errmsg=driver.findElement(By.xpath("//p[@id='alert-message']"));
             System.out.println("Login failed. Error message: " + errmsg.getText());
