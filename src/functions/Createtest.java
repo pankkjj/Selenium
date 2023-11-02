@@ -14,24 +14,16 @@ public class Createtest {
 
    public static void create(WebDriver driver,String testname) throws InterruptedException
    {
-
-        if(driver.getCurrentUrl().equals("https://cqtestga.com/acc")) 
-        {
-            
-            Thread.sleep(1000);
-            Actions.clickButton(driver, "//div[@class=\"square-dropdown-img\"]",  Duration.ofSeconds(10));
-            Actions.clickButton(driver, "//a[@id='quizServerRedirect']", Duration.ofSeconds(10));
-        }
-        else{
-            System.out.println("not redirected to /acc");
-            return;
-        }
+        driver.get("https://test.cqtestga.com/test/dashboard");
+     
         
          if(driver.getCurrentUrl().equals("https://test.cqtestga.com/test/dashboard")) 
         {  
             Actions.clickButton(driver,"//a[contains(text(),'Tests')]" ,  Duration.ofSeconds(20));
         }
-        Actions.clickButton(driver,"//a[contains(text(),'Tests')]" ,  Duration.ofSeconds(20));
+        else{
+            System.out.println("not in test server");
+        }
 
         Actions.clickButton(driver,"//body/div[9]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/button[1]" ,  Duration.ofSeconds(10));
         Actions.sendKeys(driver, "//input[@id='newQuizTitle']",   Duration.ofSeconds(10), testname);

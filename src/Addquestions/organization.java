@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Myorgques {
+public class organization {
     
        public static void Addquestions(WebDriver driver,String url) throws InterruptedException{
             driver.get(url);

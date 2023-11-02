@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 import Basicfunctionalities.Actions;
 
 public class Codequotient {
-    public static void Addquestions(WebDriver driver,String url) throws InterruptedException{
-            driver.get(url);
+    public static void Addquestions(WebDriver driver,String id) throws InterruptedException{
+            driver.get("https://test.cqtestga.com/test/addQuizContent/"+id);
             Actions.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
             Thread.sleep(2000);
             
