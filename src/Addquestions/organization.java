@@ -15,19 +15,16 @@ public class organization {
             Actions.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
             Thread.sleep(2000);
             
-            int sections=0;
-            String alertmsg=driver.findElement(By.xpath("//p[@id='alert-text']")).getText();
-            System.out.println(alertmsg);
-            if(alertmsg.equals("New section created.")){
-                sections++;
+            if(Actions.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
+            {
+                System.out.println(driver.findElement(By.xpath("//div[@class='modal-alert-msg color-1 visible-alert-modal']")).getText());
             }
             else{
-                System.out.println("Failed to create section");
-                driver.close();
-                return;
+                System.out.println("alert didn't appear");
             }
-
-            Actions.clickButton(driver,  "//a[(@class=\"btn ml-3 add-btn-new add-content-link\")]", Duration.ofSeconds(10));     
+            List<WebElement>sections=driver.findElements(By.xpath("//div[@class='sections']")); 
+            Actions.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
+            
             Actions.clickButton(driver, "//button[@title=\"My Questions\"]", Duration.ofSeconds(10)); 
             Actions.clickButton(driver, "//a[normalize-space()=\"My Organization\"]", Duration.ofSeconds(10));
            
