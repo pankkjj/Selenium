@@ -8,9 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import io.opentelemetry.exporter.logging.SystemOutLogRecordExporter;
 
-public class Actions {
+public class perform {
 
     public static void sendKeys(WebDriver driver, String path, Duration time, String value) {
         try{
