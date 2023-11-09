@@ -1,4 +1,4 @@
-package functions;
+package Quizserver;
 import java.time.Duration;
 import Basicfunctionalities.*;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +8,10 @@ public class Createtest {
 
    public static void create(WebDriver driver,String testname) throws InterruptedException
    {
-        driver.get("https://test.cqtestga.com/test/dashboard");
+        driver.get("http://test.cqtestga.com:3003/test/dashboard");
      
         
-         if(driver.getCurrentUrl().equals("https://test.cqtestga.com/test/dashboard")) 
+         if(driver.getCurrentUrl().equals("http://test.cqtestga.com:3003/test/dashboard")) 
         {  
             perform.clickButton(driver,"//a[contains(text(),'Tests')]" ,  Duration.ofSeconds(20));
         }
@@ -43,8 +43,7 @@ public class Createtest {
        
     }
     
-    //     }
-    // }
+
 
  
 }

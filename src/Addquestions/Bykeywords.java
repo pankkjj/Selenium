@@ -15,7 +15,7 @@ public class Bykeywords {
     public static void Addquestions(WebDriver driver, String id, String keyword) throws InterruptedException{
          
         // driver.get("https://test.cqtestga.com/test/addQuizContent/"+id);
-         driver.get(id);
+        driver.get(id);
         perform.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
         Thread.sleep(2000);
             

@@ -1,4 +1,4 @@
-package functions;
+package Quizserver;
 
 
 import org.openqa.selenium.By;
@@ -13,8 +13,8 @@ public class Login {
         driver.get("https://cqtestga.com/login");
 
 
-        driver.findElement(By.id("email")).sendKeys("pankaj.thakur@codequotient.com");;
-        driver.findElement(By.id("password")).sendKeys("Holmes@221");;
+        driver.findElement(By.id("email")).sendKeys("pankaj.thakur@codequotient.com");
+        driver.findElement(By.id("password")).sendKeys("Holmes@221");
         
         driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
         

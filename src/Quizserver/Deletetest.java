@@ -1,4 +1,4 @@
-package functions;
+package Quizserver;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
