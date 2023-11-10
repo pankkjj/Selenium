@@ -88,5 +88,42 @@ public class Batch {
 
         driver.get(url);
         perform.clickButton(driver, "//a[@class=\"btn btn-theme mr-3 create-btn tooltip-down\"]", Duration.ofSeconds(10));
+         try
+            {
+                // Thread.sleep(2000);
+                // List <WebElement> rowslist = driver.findElements(By.xpath("//table[@id=\"mentor-data-table\"]//tr[ @class='even' or @class='odd']"));
+                
+                // int total=rowslist.size();
+                // if(rowslist.size()<=0)
+                // {
+                //   System.out.println("No questions in my organization to add");
+                //   return;
+                // }
+                // else
+                // {
+                //     System.out.println("total questions in page "+total);
+                //     int count = 1;
+                //     while(count<=3)
+                //     {
+                //         try
+                //         {
+                //             perform.clickButton(driver, "//table[@id=\"mentor-data-table\"]//tr[" + count + "]//td//input[@type='checkbox']", Duration.ofSeconds(10));
+                          
+                //             count++;
+                //         }
+                //         catch(Exception e)
+                //         {
+                //             System.out.println("again here");   
+                //             System.out.println("Stale Exception");                
+                //         }
+                //     }
+                // } 
+             perform.clickButton(driver,  " //button[@type='button'][normalize-space()='Save']", Duration.ofSeconds(10));
+            }
+            catch(Exception e){
+                   System.out.println("Error in selecting Learners"); 
+            }   
+
+
     }
 }
