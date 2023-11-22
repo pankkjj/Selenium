@@ -137,10 +137,22 @@ public class Batch {
         perform.clickButton(driver, "//button[@type=\"submit\"][normalize-space()=\"Upload\"]", Duration.ofSeconds(10));
         }
 
-    public static void Removelearner(WebDriver driver, String url, String email){
+    public static void Removelearner(WebDriver driver, String url, String email) throws InterruptedException{
        
         driver.get(url);
         perform.sendKeys(driver, "//input[@placeholder=\"Search in batch\"]", Duration.ofSeconds(10), email);
+        Thread.sleep(2000);
 
-    }    
+        perform.clickButton(driver, "//tr[@class=\"even\" or @class=\"odd\"]//td[15]", Duration.ofSeconds(10));
+        perform.clickButton(driver, "//button[@id=\"yes-btn-modal\"]", Duration.ofSeconds(10));
+        Thread.sleep(500);
+
+        boolean result= perform.isElementVisible(driver, "//div[@class='toast-alert success-alert visible']", Duration.ofSeconds(10));
+        if(result)
+        {
+            String message=driver.findElement(By.xpath("//div[@class='toast-alert success-alert visible']")).getText();
+            System.out.println(message);
+        }
+    }   
+     
 }

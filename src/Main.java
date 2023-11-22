@@ -1,8 +1,8 @@
 import Addquestions.*;
+import Excel.excelfile;
 import Mainserver.Batch;
+import Mainserver.Profile;
 import Quizserver.*;
-
-import org.openqa.selenium.interactions.Actions;
 
 import java.io.IOException;
 import java.util.Set;
@@ -12,29 +12,66 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class Main {
-    static WebDriver driver=new ChromeDriver();
+    //  static WebDriver driver=new ChromeDriver();
     public static void main(String[] args) throws InterruptedException, IOException {
+    //     String [] users = { 
+    //            "learner1@gmail.vv",                                                                                                                                                           
+    //            "learner2@gmail.vv",
+    //            "learner3@gmail.vv",
+    //            "user1@gmail.com",
+    //            "user2@gmail.com", 
+    //            "learner4@gmail.vv",
+    //            "learner5@gmail.com",
+    //            "learner6@gmial.com",
+    //            "learner7@gmail.com",
+    //            "learner8@gmail.co",
+    //            "learner9@gmail.com",
+    //            "learner10@gmail.com",
+    //            "learner11@gmail.com",
+    //            "learner12@gmail.com",
+    //            "learner13@gmail.com",
+    //            "learner14@gmail.com",
+    //            "learner15@gmail.com",
+    //            "learner16@gmail.com",
+    //            "learner17@gmail.com",
+    //            "learner18@gmail.com",
+    //            "learner19@gmail.com",
+    //            "learner20@gmail.com",
+    //            "learner21@gmail.com",
+    //            "learner22@gmail.com",
+    //            "admin.learner@cq.test",
+    //            "zoro@gmail.com",
+    //            "luffy@gmail.com",
+    //            "learner40@cqtest.ga",
+    //            "learner50@cqtestga.com",
+    //            "learner60@cqtestga.com",
+    //            "learner500@cq.test",
+    //            "learner120@cq.test",
+    //            "learner1000@cq.test",
+    //            "learner140@cq.test",
+    //            "learner150@cq.test",
+    //            "learner151@cq.test",
+    //            "learner152@cq.test",
+    //            "learner153@cq.test",
+    //            "learner.152@cq.test",
+    //            "learner.156@codequotient.com",
+    //            "learner.157@codequotient.com",
+    //            "learner.158@codequotient.com",
+    //            "learner160@g.vv",
+    //            "learner23@gamil.com"
+    //    };
+    //     int count = 103;
+    //     for(String user : users){
+    //       Thread.sleep(2000);
+    //       Login.login(driver,user,"Holmes@221"); 
+    //       System.out.println(user);
+    //       Profile.setusername(driver,"user"+count);
+    //       count++;
+    //       Thread.sleep(1000);
+    //     }
+             excelfile.merge();
+        //    Login.login(driver, "pankaj.thakur@codequotient.com", "Holmes@221");
         
-        Login.login(driver);   
-
-        Batch.Findbatch(driver, "https://cqtestga.com/batch/list","Mybatch");
-        
-        matchtitle(driver, "Batch Learners | CodeQuotient");
-        
-        Batch.Addbulkusers(driver, driver.getCurrentUrl());
-        
-        // System.out.println(tabs);
-        
-        // String currenttab = tabs.iterator().next();
-        // tabs.remove(currenttab);
-
-        // String newtab= tabs.iterator().next();
-
-        // driver.switchTo().window(newtab);
-
-        // System.out.println(driver.getCurrentUrl());
-        // Batch.Addlearners(driver, driver.getCurrentUrl());
-        Batch.Removelearner(driver, driver.getCurrentUrl(), "learner23@gmail.com");
     }
 
 
