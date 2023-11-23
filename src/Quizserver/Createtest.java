@@ -1,7 +1,12 @@
 package Quizserver;
 import java.time.Duration;
 import Basicfunctionalities.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 
 public class Createtest {
@@ -43,7 +48,19 @@ public class Createtest {
        
     }
     
-
+   public static void selectdate(WebDriver driver, String url) throws InterruptedException{
+      
+      driver.get(url);
+      perform.clickButton(driver,"//div[@id='change-tab-2']", Duration.ofSeconds(10));
+      perform.clickButton(driver, "//input[@id=\"quizStartDate\"]", Duration.ofSeconds(20));
+      perform.clickButton(driver, "(//div[@class=\"xdsoft_label xdsoft_year\"])[2]", Duration.ofSeconds(20));
+      Thread.sleep(1000);
+      WebElement element= driver.findElement(By.xpath("//div[text()='2000']"));
+      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+      Thread.sleep(1100);
+      Actions actions = new Actions(driver);
+      actions.moveToElement(element).perform();
+   }
 
  
 }
