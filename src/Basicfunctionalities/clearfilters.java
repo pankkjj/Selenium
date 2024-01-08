@@ -8,13 +8,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class clearfilters {
+    
     public static void clear(WebDriver driver){
         List <WebElement> filters=driver.findElements(By.xpath("(//img[starts-with(@onclick,'tagclear')])"));
         int i=1;
         while(i<=filters.size())
         {
-            perform.clickButton(driver, "(//img[starts-with(@onclick,'tagclear')])["+ i + "]", Duration.ofSeconds(10));
+            Basic.clickButton(driver, "(//img[starts-with(@onclick,'tagclear')])["+ i + "]", Duration.ofSeconds(10));
             i++;
         }
     }
+
 }

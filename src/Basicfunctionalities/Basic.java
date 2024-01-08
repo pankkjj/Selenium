@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class perform {
+public class Basic {
 
     public static void sendKeys(WebDriver driver, String path, Duration time, String value) {
         try{
@@ -18,7 +18,7 @@ public class perform {
              element.sendKeys(value);
         }
         catch(Exception e){
-           System.out.println("Element not found");
+           System.out.println("Element not found" + path);
         }
        
     }
@@ -31,7 +31,7 @@ public class perform {
             new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(element));
             element.click();
         }catch(Exception e){
-            System.out.println(("Cannot find element "+path));
+            System.out.println("Cannot find element "+path);
         }
       
     }
@@ -53,5 +53,17 @@ public class perform {
         }catch(Exception e){
             System.out.println("Error in clearing keys");
         }
+    }
+    
+    public static WebElement find(WebDriver driver,String path, Duration time){
+        try{
+            new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
+            WebElement element = driver.findElement(By.xpath(path));
+            return element;
+        }catch(Exception e){
+            System.out.println("Cannot find element "+path);
+        }
+        System.out.println("element not found"+path);
+        return null;
     }
 }

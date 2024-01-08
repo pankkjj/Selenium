@@ -20,8 +20,8 @@ public class checkresponse {
                                 .build();
         try {
             HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.statusCode());
-            System.out.println(response.request());
+            System.out.println(response.body());
+            // System.out.println(response.request());
         } catch (IOException e) {
           
             e.printStackTrace();

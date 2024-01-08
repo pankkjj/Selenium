@@ -15,10 +15,10 @@ public class addquestions {
 
             // driver.get("https://test.cqtestga.com/test/addQuizContent/"+id);
             driver.get(id);
-            perform.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
+            Basic.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
             Thread.sleep(2000);
             
-            if(perform.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
+            if(Basic.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
             {
                 System.out.println(driver.findElement(By.xpath("//div[@class='modal-alert-msg color-1 visible-alert-modal']")).getText());
             }
@@ -26,12 +26,12 @@ public class addquestions {
                 System.out.println("alert didn't appear");
             }
             List<WebElement>sections=driver.findElements(By.xpath("//div[@class='sections']")); 
-            perform.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
+            Basic.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
         
-            perform.clickButton(driver, "//div[@class='filter-input-section']", Duration.ofSeconds(10));
-            perform.clickButton(driver,  "//li[@onclick=\"openItemDropdoen('type-items')\"]", Duration.ofSeconds(10));
-            perform.clickButton(driver,  "//label[normalize-space()='Coding']", Duration.ofSeconds(10));
-            perform.clickButton(driver,  "//button[@class='btn apply-btn type-apply-btn']", Duration.ofSeconds(10));
+            Basic.clickButton(driver, "//div[@class='filter-input-section']", Duration.ofSeconds(10));
+            Basic.clickButton(driver,  "//li[@onclick=\"openItemDropdoen('type-items')\"]", Duration.ofSeconds(10));
+            Basic.clickButton(driver,  "//label[normalize-space()='Coding']", Duration.ofSeconds(10));
+            Basic.clickButton(driver,  "//button[@class='btn apply-btn type-apply-btn']", Duration.ofSeconds(10));
             Thread.sleep(2000);
             
             int count = 1;
@@ -41,11 +41,11 @@ public class addquestions {
                      
                     WebElement score=driver.findElement(By.xpath("(//tr[@role='row']["+ count +"]//td[8])"));
                     int marks=Integer.parseInt(score.getText());
-                    if(marks==0){
+                    if(marks>0){
 
                         System.out.println(marks+"  "+count+ "(//tr[@role='row']["+ count +"]//td[8])" );
                         System.out.println(driver.findElement(By.xpath("(//tr[@role='row']["+ count +"]//td[3])")).getText());
-                        perform.clickButton(driver, "(//tr[@role='row'][" + count  + "]//td//input[@type='checkbox'])", Duration.ofSeconds(5));
+                        Basic.clickButton(driver, "(//tr[@role='row'][" + count  + "]//td//input[@type='checkbox'])", Duration.ofSeconds(5));
 
                     }
                     
@@ -58,7 +58,7 @@ public class addquestions {
                 }
             }
 
-            perform.clickButton(driver,  " //button[@type='button'][normalize-space()='save']", Duration.ofSeconds(10));    
+            Basic.clickButton(driver,  " //button[@type='button'][normalize-space()='save']", Duration.ofSeconds(10));    
 
     }
 
@@ -66,11 +66,11 @@ public class addquestions {
          
         // driver.get("https://test.cqtestga.com/test/addQuizContent/"+id);
         driver.get(id);
-        perform.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
+        Basic.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
         Thread.sleep(2000);
             
      
-        if(perform.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
+        if(Basic.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
         {
             System.out.println(driver.findElement(By.xpath("//div[@class='modal-alert-msg color-1 visible-alert-modal']")).getText());
         }
@@ -79,20 +79,20 @@ public class addquestions {
         }
 
         List<WebElement>sections=driver.findElements(By.xpath("//div[@class='sections']")); 
-        perform.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
+        Basic.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
         List <WebElement> filters=driver.findElements(By.xpath("(//img[starts-with(@onclick,'tagclear')])"));
         int i=1;
         while(i<=filters.size())
         {
-            perform.clickButton(driver, "(//img[starts-with(@onclick,'tagclear')])["+ i + "]", Duration.ofSeconds(10));
+            Basic.clickButton(driver, "(//img[starts-with(@onclick,'tagclear')])["+ i + "]", Duration.ofSeconds(10));
             i++;
         }
-        perform.clickButton(driver, "//input[@class=\"filter-input\"]", Duration.ofSeconds(10));
-        perform.clickButton(driver, "//li[normalize-space()=\"Keyword\"]", Duration.ofSeconds(10));
+        Basic.clickButton(driver, "//input[@class=\"filter-input\"]", Duration.ofSeconds(10));
+        Basic.clickButton(driver, "//li[normalize-space()=\"Keyword\"]", Duration.ofSeconds(10));
      
 
-        perform.clickButton(driver, "//label[@title='"+ keyword +"' ]", Duration.ofSeconds(10));
-        perform.clickButton(driver, "//button[@class=\"btn apply-btn keyword-apply-btn\" ]", Duration.ofSeconds(10));
+        Basic.clickButton(driver, "//label[@title='"+ keyword +"' ]", Duration.ofSeconds(10));
+        Basic.clickButton(driver, "//button[@class=\"btn apply-btn keyword-apply-btn\" ]", Duration.ofSeconds(10));
        
     }
 
@@ -100,11 +100,11 @@ public class addquestions {
 
         // driver.get("https://test.cqtestga.com/test/addQuizContent/"+id);
         driver.get(id);
-        perform.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
+        Basic.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
         Thread.sleep(2000);
         
  
-        if(perform.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
+        if(Basic.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
         {
             System.out.println(driver.findElement(By.xpath("//div[@class='modal-alert-msg color-1 visible-alert-modal']")).getText());
         }
@@ -113,10 +113,10 @@ public class addquestions {
         }
 
         List<WebElement>sections=driver.findElements(By.xpath("//div[@class='sections']")); 
-        perform.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
+        Basic.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
 
-        perform.clickButton(driver, "//button[@data-id=\"fltrQBy\"]", Duration.ofSeconds(10)); 
-        perform.clickButton(driver, "//a[normalize-space()=\"CodeQuotient\"]", Duration.ofSeconds(10));
+        Basic.clickButton(driver, "//button[@data-id=\"fltrQBy\"]", Duration.ofSeconds(10)); 
+        Basic.clickButton(driver, "//a[normalize-space()=\"CodeQuotient\"]", Duration.ofSeconds(10));
         
       
    }
@@ -124,10 +124,10 @@ public class addquestions {
     public static void organization(WebDriver driver,String url) throws InterruptedException{
     driver.get(url);
     Thread.sleep(1000);
-    perform.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
+    Basic.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
     Thread.sleep(2000);
     
-    if(perform.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
+    if(Basic.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
     {
         System.out.println(driver.findElement(By.xpath("//div[@class='modal-alert-msg color-1 visible-alert-modal']")).getText());
     }
@@ -135,19 +135,19 @@ public class addquestions {
         System.out.println("alert didn't appear");
     }
     List<WebElement>sections=driver.findElements(By.xpath("//div[@class='sections']")); 
-    perform.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
+    Basic.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10)); 
     
-    perform.clickButton(driver, "//button[@title=\"My Questions\"]", Duration.ofSeconds(10)); 
-    perform.clickButton(driver, "//a[normalize-space()=\"My Organization\"]", Duration.ofSeconds(10)); 
+    Basic.clickButton(driver, "//button[@title=\"My Questions\"]", Duration.ofSeconds(10)); 
+    Basic.clickButton(driver, "//a[normalize-space()=\"My Organization\"]", Duration.ofSeconds(10)); 
    }
 
     public static void quesperpage(WebDriver driver,String id,String count) throws InterruptedException 
     {
         driver.get("https://test.cqtestga.com/test/addQuizContent/"+id);
-         perform.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
+         Basic.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
             Thread.sleep(2000);
           
-            if(perform.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
+            if(Basic.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
             {
                 System.out.println(driver.findElement(By.xpath("//div[@class='modal-alert-msg color-1 visible-alert-modal']")).getText());
             }
@@ -156,7 +156,7 @@ public class addquestions {
             }
             
             List<WebElement>sections=driver.findElements(By.xpath("//div[@class='sections']")); 
-            perform.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10));
+            Basic.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10));
             
             WebElement dropdown=driver.findElement(By.xpath("//select[@name=\"tblCCLs_length\"]"));
             Select select=new Select(dropdown);
@@ -167,10 +167,10 @@ public class addquestions {
     public static void getcount(WebDriver driver,String id) throws InterruptedException
     {
            driver.get("https://test.cqtestga.com/test/addQuizContent/"+id);
-           perform.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
+           Basic.clickButton(driver,  "//a[contains(text(),'+ create new section')]", Duration.ofSeconds(10));
            Thread.sleep(2000);
          
-           if(perform.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
+           if(Basic.isElementVisible(driver, "//div[@class='modal-alert-msg color-1 visible-alert-modal']", Duration.ofSeconds(10))) 
            {
                System.out.println(driver.findElement(By.xpath("//div[@class='modal-alert-msg color-1 visible-alert-modal']")).getText());
            }
@@ -179,11 +179,11 @@ public class addquestions {
            }
            
            List<WebElement>sections=driver.findElements(By.xpath("//div[@class='sections']")); 
-           perform.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10));
+           Basic.clickButton(driver,  "(//a[@class=\"btn ml-3 add-btn-new add-content-link\"])[" + sections.size() + "]", Duration.ofSeconds(10));
            Thread.sleep(500);
            List <WebElement> pages=driver.findElements(By.xpath("//a[starts-with(@class,\"paginate_button \")]")); 
            int totalpages=pages.size()-1;
-           perform.clickButton(driver, "(//a[starts-with(@class,'paginate_button')])["+ totalpages +"]", Duration.ofSeconds(10));
+           Basic.clickButton(driver, "(//a[starts-with(@class,'paginate_button')])["+ totalpages +"]", Duration.ofSeconds(10));
            Thread.sleep(1000);
 
            List <WebElement> rowslist = driver.findElements(By.xpath("//tr[ @class='even' or @class='odd']"));

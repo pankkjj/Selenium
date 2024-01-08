@@ -7,9 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import Basicfunctionalities.perform;
+import Basicfunctionalities.Basic;
 
 public class selectquestions {
+    
     public static void select(WebDriver driver,int num)
     {
         try
@@ -31,7 +32,7 @@ public class selectquestions {
                     {
                         try
                         {
-                            perform.clickButton(driver, "(//tr[@role='row'][" + count + "]//td//input[@type='checkbox'])", Duration.ofSeconds(10));
+                            Basic.clickButton(driver, "(//tr[@role='row'][" + count + "]//td//input[@type='checkbox'])", Duration.ofSeconds(10));
                             count++;
                         }
                         catch(Exception e)
@@ -41,7 +42,7 @@ public class selectquestions {
                         }
                     }
                 } 
-                perform.clickButton(driver,  " //button[@type='button'][normalize-space()='save']", Duration.ofSeconds(10));
+                Basic.clickButton(driver,  " //button[@type='button'][normalize-space()='save']", Duration.ofSeconds(10));
             }
             catch(Exception e){
                    System.out.println("Error in selecting questions"); 

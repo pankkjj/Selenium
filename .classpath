@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-21">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Selenium/apache/commons-collections4-4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Selenium/apache/poi-3.17.jar"/>
@@ -13,5 +9,7 @@
 	<classpathentry kind="lib" path="C:/Selenium/apache/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="C:/Selenium/selenium-server-4.14.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Pankaj Thakur/Downloads/commons-io-2.15.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pankaj Thakur/Downloads/testng-7.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pankaj Thakur/Downloads/jcommander-1.82.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
