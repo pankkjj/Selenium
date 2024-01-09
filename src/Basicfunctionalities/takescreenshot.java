@@ -6,8 +6,10 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import java.time.LocalDate;
 
+import Config.Config;
+
+import java.time.LocalDate;
 public class takescreenshot {
     
     public static void shot(WebDriver driver, String name){
