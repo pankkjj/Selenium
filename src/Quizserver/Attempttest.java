@@ -1,10 +1,12 @@
 package Quizserver;
 
 import java.io.IOException;
+import java.io.ObjectInputFilter.Config;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.poi.ss.formula.eval.ConcatEval;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import Basicfunctionalities.Basic;
+import Basicfunctionalities.takescreenshot;
 
 public class Attempttest {
     
@@ -26,6 +29,7 @@ public class Attempttest {
         Basic.clickButton(driver, "//button[@type='submit']", Duration.ofSeconds(10));
         if(Basic.isElementVisible(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(3))){
             System.out.println(driver.findElement(By.xpath("//div[@class=\"ant-message\"]")).getText());
+            takescreenshot.shot(driver, "logInError");
             return;
         }
         Thread.sleep(2000);
@@ -39,7 +43,7 @@ public class Attempttest {
       
     }
 
-    public static void signup(WebDriver driver, String testlink, String email, String password, String testcode, String name) throws InterruptedException
+    public static void signup(WebDriver driver, String testlink, String email, String password, String testcode, String name, String screenshotPath) throws InterruptedException
     {
         driver.get(testlink);
         Thread.sleep(1000);
@@ -54,12 +58,16 @@ public class Attempttest {
 
         if(Basic.isElementVisible(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(3))){
             System.out.println(driver.findElement(By.xpath("//div[@class=\"ant-message\"]")).getText());
+            takescreenshot.shot(driver, "SignUpError");
             return;
         }
         Thread.sleep(2000);
         if(Basic.isElementVisible(driver, "//button[normalize-space()=\"Full Screen\"]", Duration.ofSeconds(3))){
             Basic.clickButton(driver, "//button[normalize-space()=\"Full Screen\"]", Duration.ofSeconds(3));
         }  
+        else{
+            takescreenshot.shot(driver,"NoFullScreen");
+        }
         if(( driver.getCurrentUrl().contains("details"))){
             Basic.clickButton(driver, "//button[normalize-space()=\"start test\"]", Duration.ofSeconds(3));
         }
@@ -98,10 +106,13 @@ public class Attempttest {
                 Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
                 attemptweb(driver, actions);
             }
-            else {
+            else if(questype.equals("MQ")) {
                 System.out.println("MQ found");
                 Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
                 attemptMQ(driver);
+            }
+            else{
+                takescreenshot.shot(driver, "queNotFound");
             }
 
             i++;
@@ -109,6 +120,7 @@ public class Attempttest {
       
        Basic.clickButton(driver, "//button[normalize-space()=\"Submit Test\"]", Duration.ofSeconds(2));
        Basic.clickButton(driver, "//button[normalize-space()=\"yes\"]", Duration.ofSeconds(2));
+
        submitfeedback(driver);
     }
 
@@ -142,10 +154,10 @@ public class Attempttest {
                    writeCPP("fail", driver, actions); 
                 }
                 Basic.clickButton(driver, "//button[normalize-space()=\"submit\"]", Duration.ofSeconds(10));
-                Thread.sleep(500);
+                Thread.sleep(1000);
                 Basic.clickButton(driver, "//button[normalize-space()=\"stay\"]", Duration.ofSeconds(10));
               }
-
+              Thread.sleep(1000); 
               Basic.clickButton(driver, 
               "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]",
               Duration.ofSeconds(10));
@@ -171,7 +183,7 @@ public class Attempttest {
 
              } 
              
-
+             Thread.sleep(1000);
              Basic.clickButton(driver,
               "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]", 
              Duration.ofSeconds(10));
@@ -197,7 +209,7 @@ public class Attempttest {
                 Basic.clickButton(driver, "//button[normalize-space()=\"stay\"]", Duration.ofSeconds(10));
 
              } 
-
+             Thread.sleep(1000);
              Basic.clickButton(driver,
              "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]",
              Duration.ofSeconds(10));
@@ -226,6 +238,7 @@ public class Attempttest {
                 Basic.clickButton(driver, "//button[normalize-space()=\"stay\"]", Duration.ofSeconds(10));
 
              }
+             Thread.sleep(1000);             
              Basic.clickButton(driver,
               "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]",
              Duration.ofSeconds(10));
@@ -250,6 +263,7 @@ public class Attempttest {
                 Basic.clickButton(driver, "//button[normalize-space()=\"stay\"]", Duration.ofSeconds(10));
 
              }
+            Thread.sleep(1000);
            Basic.clickButton(driver,
             "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]",
            Duration.ofSeconds(10));
@@ -274,6 +288,7 @@ public class Attempttest {
                 Basic.clickButton(driver, "//button[normalize-space()=\"stay\"]", Duration.ofSeconds(10));
 
              }
+             Thread.sleep(1000);
             Basic.clickButton(driver,
             "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]", 
             Duration.ofSeconds(10));
@@ -297,6 +312,7 @@ public class Attempttest {
                 Thread.sleep(1000);
                 Basic.clickButton(driver, "//button[normalize-space()=\"stay\"]", Duration.ofSeconds(10));
               }
+             Thread.sleep(1000);
               Basic.clickButton(driver,
                "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]",
               Duration.ofSeconds(10));
@@ -414,47 +430,50 @@ public class Attempttest {
 
     public static void writeC(String type,WebDriver driver, Actions actions) throws InterruptedException
     {   
-        Thread.sleep(500);
+        Thread.sleep(1000);
         if(type.equals("error"))
         {
                System.out.println("Writing error");
-               actions.click(Basic.find(driver, "//div[@class='question-attempt-pane']", Duration.ofSeconds(5)))
+               actions.click(Basic.find(driver, "//div[@class='ace_content']", Duration.ofSeconds(5)))
                .keyDown(Keys.SHIFT)
                .sendKeys(Keys.PAGE_UP)
                .keyUp(Keys.SHIFT)
                .sendKeys(Keys.BACK_SPACE)
-
-               .sendKeys("int a , b;",Keys.ENTER)
-               .sendKeys("scanf( \" %d %d \", &a ,&b)",Keys.ENTER)
+               .sendKeys("int a , b;")
+               .sendKeys("scanf( \" %d %d \", &a ,&b)")
                .sendKeys("printf(\" %d \", a+b);")
                .perform(); 
+              
         }
         else if(type.equals("pass"))
         {
            System.out.println("Writing pass");
-           actions.click(Basic.find(driver, "//div[@class='question-attempt-pane']", Duration.ofSeconds(5)))
+           actions.click(Basic.find(driver, "//div[@class='ace_content']", Duration.ofSeconds(5)))
            .keyDown(Keys.SHIFT)
            .sendKeys(Keys.PAGE_UP)
            .keyUp(Keys.SHIFT)
            .sendKeys(Keys.BACK_SPACE)
-           .sendKeys("int a , b;",Keys.ENTER)
-           .sendKeys("scanf( \" %d %d \", &a ,&b);",Keys.ENTER)
+           .sendKeys("int a , b;")
+           .sendKeys("scanf( \" %d %d \", &a ,&b);")
            .sendKeys("printf(\" %d \", a+b);")
-           .perform(); 
+           .perform();
+          
         }
         else
         {
             System.out.println("Writing fail");
-            actions.click(Basic.find(driver, "//div[@class='question-attempt-pane']", Duration.ofSeconds(5)))
+            actions.click(Basic.find(driver, "//div[@class='ace_content']", Duration.ofSeconds(5)))
            .keyDown(Keys.SHIFT)
            .sendKeys(Keys.PAGE_UP)
            .keyUp(Keys.SHIFT)
            .sendKeys(Keys.BACK_SPACE)
-           .sendKeys("int a , b;",Keys.ENTER)
-           .sendKeys("scanf( \" %d %d \", &a ,&b);",Keys.ENTER)
+           .sendKeys("int a , b;")
+           .sendKeys("scanf( \" %d %d \", &a ,&b);")
            .sendKeys("printf(\" %d \", a+a);")
            .perform(); 
+           
         }
+        Thread.sleep(1000);
     }
 
    public static void writeCPP(String type,WebDriver driver, Actions actions) throws InterruptedException
@@ -476,6 +495,7 @@ public class Attempttest {
         else if(type.equals("pass"))
         {
            System.out.println("Writing pass");
+           Thread.sleep(1000);
            actions.click(Basic.find(driver, "//div[@class='question-attempt-pane']", Duration.ofSeconds(5)))
            .keyDown(Keys.SHIFT)
            .sendKeys(Keys.PAGE_UP)
@@ -489,6 +509,7 @@ public class Attempttest {
         else
         {
             System.out.println("Writing fail");
+            Thread.sleep(1000);
             actions.click(Basic.find(driver, "//div[@class='question-attempt-pane']", Duration.ofSeconds(5)))
            .keyDown(Keys.SHIFT)
            .sendKeys(Keys.PAGE_UP)
@@ -499,6 +520,7 @@ public class Attempttest {
            .sendKeys("cout<<a+a;")
            .perform(); 
         }
+        Thread.sleep(1000);
     }
     
     public static void writeCsharp(String type,WebDriver driver, Actions actions) throws InterruptedException
@@ -512,7 +534,7 @@ public class Attempttest {
                .keyUp(Keys.SHIFT)
                .sendKeys(Keys.BACK_SPACE)
 
-               .sendKeys("int a = Convert.ToInt32(Console.ReadLine());", Keys.ENTER)
+               .sendKeys("int a = Convert.ToInt32(Console.ReadLine());")
                .sendKeys("int b = Convert.ToInt32(Console.ReadLine());",Keys.ENTER)
                .sendKeys("Console.WriteLine(a+q);")
                .perform(); 
@@ -524,8 +546,8 @@ public class Attempttest {
            .sendKeys(Keys.PAGE_UP)
            .keyUp(Keys.SHIFT)
            .sendKeys(Keys.BACK_SPACE)
-           .sendKeys("int a = Convert.ToInt32(Console.ReadLine());", Keys.ENTER)
-           .sendKeys("int b = Convert.ToInt32(Console.ReadLine());",Keys.ENTER)
+           .sendKeys("int a = Convert.ToInt32(Console.ReadLine());")
+           .sendKeys("int b = Convert.ToInt32(Console.ReadLine());")
            .sendKeys("Console.WriteLine(a+b);")
            .perform();  
         }
@@ -537,11 +559,12 @@ public class Attempttest {
                .keyUp(Keys.SHIFT)
                .sendKeys(Keys.BACK_SPACE)
 
-               .sendKeys("int a = Convert.ToInt32(Console.ReadLine());", Keys.ENTER)
-               .sendKeys("int b = Convert.ToInt32(Console.ReadLine());",Keys.ENTER)
+               .sendKeys("int a = Convert.ToInt32(Console.ReadLine());")
+               .sendKeys("int b = Convert.ToInt32(Console.ReadLine());")
                .sendKeys("Console.WriteLine(a+a+b);")
                .perform(); 
         }
+        Thread.sleep(1000);
     }
 
     public static void writeJava(String type,WebDriver driver, Actions actions) throws InterruptedException
@@ -555,7 +578,7 @@ public class Attempttest {
                .sendKeys(Keys.PAGE_UP)
                .keyUp(Keys.SHIFT)
                .sendKeys(Keys.BACK_SPACE)
-               .sendKeys("int a , b;",Keys.ENTER)
+               .sendKeys("int a , b;")
                .sendKeys("scanf( \" %d %d \", &a ,&b)",Keys.ENTER)
                .sendKeys("printf(\" %d \", a+b);")
                .perform(); 
@@ -563,6 +586,7 @@ public class Attempttest {
         else if(type.equals("pass"))
         {
            System.out.println("Writing pass");
+           Thread.sleep(1000);
            actions.click(Basic.find(driver, "//div[@class='question-attempt-pane']", Duration.ofSeconds(5)))
            .keyDown(Keys.SHIFT)
            .sendKeys(Keys.PAGE_UP)
@@ -578,18 +602,20 @@ public class Attempttest {
         else
         {
             System.out.println("Writing fail");
-            actions.click(Basic.find(driver, "//div[@class='question-attempt-pane']", Duration.ofSeconds(5)))
+            Thread.sleep(1000);
+            actions.click(Basic.find(driver, "//div[@class='ace_content']", Duration.ofSeconds(5)))
            .keyDown(Keys.SHIFT)
            .sendKeys(Keys.PAGE_UP)
            .keyUp(Keys.SHIFT)
            .sendKeys(Keys.BACK_SPACE)
-           .sendKeys("int a , b;")
+           .sendKeys("int a,b;")
            .sendKeys("Scanner scanner = new Scanner(System.in);")
            .sendKeys("a = scanner.nextInt();")
            .sendKeys("b = scanner.nextInt();")
            .sendKeys("System.out.println(a+b+a);")
            .perform(); 
         }
+        Thread.sleep(1000);
     }
     
     public static void writePython(String type,WebDriver driver, Actions actions) throws InterruptedException
@@ -631,9 +657,10 @@ public class Attempttest {
            .sendKeys(Keys.BACK_SPACE)
            .sendKeys("a = int(input())",Keys.ENTER)
            .sendKeys("b = int(input())",Keys.ENTER)
-           .sendKeys("print(a+b)")
+           .sendKeys("print(a+b+a)")
            .perform();  
         }
+        Thread.sleep(1000);
     }
 
     public static void writeJS(String type,WebDriver driver, Actions actions) throws InterruptedException
@@ -669,6 +696,7 @@ public class Attempttest {
            .sendKeys("console.log(\"javasscript\")")
            .perform();  
         }
+        Thread.sleep(1000);
     }
     
     public static void writePhp(String type,WebDriver driver, Actions actions) throws InterruptedException
@@ -710,11 +738,12 @@ public class Attempttest {
            .sendKeys("echo \" $a+$b+$a \" ","?>",Keys.ENTER)
            .perform();  
         }
+        Thread.sleep(1000);
     }
 
     public static void uploadfile(WebDriver driver){
         
-           String path="C:\\Users\\Pankaj Thakur\\Documents\\script.au3";
+           String path="C:\\Users\\payal\\OneDrive\\Documents\\script.au3";
         ProcessBuilder processbuilder = new ProcessBuilder("C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe", path);
         Process process;
         try {

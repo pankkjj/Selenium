@@ -16,12 +16,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-
 public class Main {
    
      
     public static void main(String[] args) throws InterruptedException, IOException {
-            System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+        String testLink = Config.testlink;
+        String testCode = Config.testCode;
+        String driverPath =  Config.driverPath;
+        String screenshotPath = Config.screenshotPath;
+            System.setProperty("webdriver.chrome.driver", driverPath);
     
             ChromeOptions options = new ChromeOptions();
             options.addArguments("use-fake-device-for-media-stream");
@@ -37,14 +40,15 @@ public class Main {
 
             WebDriver driver = new ChromeDriver(options);
             driver.manage().window().maximize();
+            for(int i=57;i<=59;i++){
             
-            for(int i=0;i<2;i++){
                Attempttest.signup(driver, 
-               "https://tests.cqtestga.com/test/1704359016339",
-               "automation" + i +"@gmail.com",
+               testLink,
+               "shinobi" + i +"@gmail.com",
                "Holmes@221",
-               "123",
-               "auto"+i
+               testCode,
+               "Shinobi"+i,
+               screenshotPath
                );
             }
        
