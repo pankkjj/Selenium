@@ -90,61 +90,6 @@ public class Attempttest {
         
         // start(driver);
     }
-        
-    // public static void start(WebDriver driver) throws InterruptedException{
-    //     Actions actions = new Actions(driver);
-    //     Thread.sleep(2000);
-    //     List<WebElement> elements = driver.findElements(By.xpath("//td[@class=\"ant-table-cell question-type\"]"));
-    //     int i = 0;
-    //     System.out.println(elements.size());
-    //     while(i<elements.size()){
-    //         WebElement[] updatedarray = updateElements(driver);
-    //         String questype = updatedarray[i].getText();
-    //         if(questype.equals("MCQ"))
-    //         {
-    //             System.out.println("Mcq found");
-    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-    //             attemptmcq(driver, 2);
-    //         }
-    //         else if (questype.equals("Coding")) {
-    //             System.out.println("Coding found");
-    //             Thread.sleep(1000);
-    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-    //             attemptcoding(driver,actions);
-    //         }
-    //         else if (questype.equals("Subjective")) {
-    //             System.out.println("Subjective found");
-                
-    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-    //             attemptsubjective(driver);
-    //         }
-    //         else if (questype.equals("Web")) {
-    //             System.out.println("Web found");
-    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-    //             attemptweb(driver, actions);
-    //         }
-    //         else if(questype.equals("MQ")) {
-    //             System.out.println("MQ found");
-    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-    //             attemptMQ(driver);
-    //         }
-    //         else{
-    //             takescreenshot.shot(driver, "queNotFound");
-    //         }
-
-    //         i++;
-    //     }
-      
-    //    Basic.clickButton(driver, "//button[normalize-space()=\"Submit Test\"]", Duration.ofSeconds(2));
-    //    Basic.clickButton(driver, "//button[normalize-space()=\"yes\"]", Duration.ofSeconds(2));
-
-    //    submitfeedback(driver);
-    // }
-
-   
-
-   
-
 
     
 
@@ -876,8 +821,8 @@ class checkalert implements Runnable{
 
             if(Basic.isElementVisible(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(1)))
             {
-
-                if(driver.findElement(By.xpath("//div[@class=\"ant-message\"]")).getText().length()>1){
+                   
+                if(Basic.find(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(1)).getText().length()>1){
                     System.out.println("content found in alert");
                     try {
                         Thread.sleep(1000);
