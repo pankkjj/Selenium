@@ -873,12 +873,21 @@ class checkalert implements Runnable{
     @Override
     public void run() {
         while(!Thread.currentThread().isInterrupted()){
-            System.out.println("Running in parallel");
 
             if(Basic.isElementVisible(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(1)))
             {
-                System.out.println(driver.findElement(By.xpath("//div[@class=\"ant-message\"]")).getText() + "Hello World");
-                // takescreenshot.shot(driver, "SignUpError");
+
+                if(driver.findElement(By.xpath("//div[@class=\"ant-message\"]")).getText().length()>1){
+                    System.out.println("content found in alert");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                     
+                        e.printStackTrace();
+                    }
+                    takescreenshot.shot(driver, "Alert found");
+                };
+                
             }
             
         }
