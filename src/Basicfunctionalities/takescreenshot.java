@@ -9,16 +9,15 @@ import org.openqa.selenium.WebDriver;
 
 import Config.Config;
 
-import java.time.LocalDate;
 public class takescreenshot {
     
     public static void shot(WebDriver driver, String name){
-        LocalDate date = LocalDate.now();
+        Long time = System.currentTimeMillis();
         String screenshotPath = Config.screenshotPath;
          TakesScreenshot screenshot = ((TakesScreenshot)driver);
-          System.out.println("Taking Screenshoot");
+          System.out.println("Taking Screenshoot"+screenshotPath);
             File SrcFile = screenshot.getScreenshotAs(OutputType.FILE);
-            File destFile = new File(screenshotPath + name + date + ".png");
+            File destFile = new File(screenshotPath + name + time.toString() + ".png");
             try {
                 FileUtils.copyFile(SrcFile, destFile);
             } catch (IOException e) {

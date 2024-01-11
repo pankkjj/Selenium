@@ -44,7 +44,6 @@ public class Basic
             new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
             return true;
         } catch (Exception e) {
-            System.out.println(e);
             return false;
         }
     }
