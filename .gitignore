@@ -1,3 +1,4 @@
+bin
 lib
-Config/config.properties
+src/Config/config.properties
 .vscode/*
