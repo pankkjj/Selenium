@@ -80,14 +80,6 @@ public class Attempttest {
         
         startthread.join();
         alertthread.interrupt();
-        // while (startthread.isAlive()) {
-
-        //     if(!startthread.isAlive())
-        //     {
-        //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-        //         alertthread.interrupt();
-        //     }
-        // }
         
         
     }
@@ -175,7 +167,7 @@ class startTest implements Runnable{
         
     }
     
-     public static void attemptmcq(WebDriver driver , int option) throws InterruptedException
+    public static void attemptmcq(WebDriver driver , int option) throws InterruptedException
     {
         Basic.clickButton(driver, "(//label[@class=\"ant-radio-wrapper ant-radio-wrapper-in-form-item\"])[" + option + "]//span[2]", Duration.ofSeconds(10));
         Basic.clickButton(driver, "//div[@class=\"submit-mcq-container\"]//button", Duration.ofSeconds(10));
@@ -185,7 +177,7 @@ class startTest implements Runnable{
         Basic.clickButton(driver, "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]", Duration.ofSeconds(10));
     }
      
-     public static void attemptcoding(WebDriver driver, Actions actions ) throws InterruptedException
+    public static void attemptcoding(WebDriver driver, Actions actions ) throws InterruptedException
     {
            
         Thread.sleep(1000);
@@ -371,7 +363,7 @@ class startTest implements Runnable{
           
     }
      
-     public static void attemptsubjective(WebDriver driver) throws InterruptedException{
+    public static void attemptsubjective(WebDriver driver) throws InterruptedException{
         Actions actions = new Actions(driver);
         if(Basic.isElementVisible(driver, "//div[@class='ql-editor ql-blank']", Duration.ofSeconds(2)))
         {    
@@ -817,7 +809,7 @@ class checkalert implements Runnable{
 
     @Override
     public void run() {
-        while(!Thread.currentThread().isInterrupted()){
+        while(true){
 
             if(Basic.isElementVisible(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(1)))
             {
