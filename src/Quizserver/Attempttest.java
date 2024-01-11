@@ -1,7 +1,6 @@
 package Quizserver;
 
 import java.io.IOException;
-import java.io.ObjectInputFilter.Config;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import Basicfunctionalities.Basic;
 import Basicfunctionalities.takescreenshot;
-
+import Config.Config;
 public class Attempttest {
     
     
@@ -79,16 +78,18 @@ public class Attempttest {
         startthread.start();
         alertthread.start();    
         
-        Boolean check = true;
-        while (check) {
-            if(startthread.isInterrupted())
-            {
-                alertthread.interrupt();
-                check = false;
-            }
-        }
+        startthread.join();
+        alertthread.interrupt();
+        // while (startthread.isAlive()) {
+
+        //     if(!startthread.isAlive())
+        //     {
+        //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        //         alertthread.interrupt();
+        //     }
+        // }
         
-        // start(driver);
+        
     }
 
     
@@ -168,7 +169,7 @@ class startTest implements Runnable{
             submitfeedback(driver);
 
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+           
             e.printStackTrace();
         }
         
@@ -793,8 +794,7 @@ class startTest implements Runnable{
 
     public static void uploadfile(WebDriver driver){
         
-           String path="C:\\Users\\payal\\OneDrive\\Documents\\script.au3";
-        ProcessBuilder processbuilder = new ProcessBuilder("C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe", path);
+        ProcessBuilder processbuilder = new ProcessBuilder(Config.autoitPath, Config.scriptPath);
         Process process;
         try {
             process = processbuilder.start();
