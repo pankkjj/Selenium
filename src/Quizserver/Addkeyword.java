@@ -15,7 +15,7 @@ public class Addkeyword {
     public static void add(WebDriver driver,String url) throws InterruptedException{
         
         driver.get(url);
-        if(Basic.isElementVisible(driver, "//input[@class='form-control tag-editor-hidden-src']",  Duration.ofSeconds(5)))
+        if(Basic.isElementVisible(driver, "//div[@class='filter-input-section']",  Duration.ofSeconds(5)))
         {
            
            Actions action=new Actions(driver);

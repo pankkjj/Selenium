@@ -39,7 +39,7 @@ public class Attempttest {
         if(( driver.getCurrentUrl().contains("details"))){
             Basic.clickButton(driver, "//button[normalize-space()=\"start test\"]", Duration.ofSeconds(10));
         }
-        start(driver);
+        // start(driver);
       
     }
 
@@ -71,60 +71,165 @@ public class Attempttest {
         if(( driver.getCurrentUrl().contains("details"))){
             Basic.clickButton(driver, "//button[normalize-space()=\"start test\"]", Duration.ofSeconds(3));
         }
-        start(driver);
+        startTest st = new startTest(driver);
+        checkalert ca = new checkalert(driver);
+        Thread startthread = new Thread(st);   
+        Thread alertthread = new Thread(ca);
+  
+        startthread.start();
+        alertthread.start();    
+        
+        Boolean check = true;
+        while (check) {
+            if(startthread.isInterrupted())
+            {
+                alertthread.interrupt();
+                check = false;
+            }
+        }
+        
+        // start(driver);
     }
         
-    public static void start(WebDriver driver) throws InterruptedException{
-        Actions actions = new Actions(driver);
-        Thread.sleep(2000);
-        List<WebElement> elements = driver.findElements(By.xpath("//td[@class=\"ant-table-cell question-type\"]"));
-        int i = 0;
-        System.out.println(elements.size());
-        while(i<elements.size()){
-            WebElement[] updatedarray = updateElements(driver);
-            String questype = updatedarray[i].getText();
-            if(questype.equals("MCQ"))
-            {
-                System.out.println("Mcq found");
-                Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-                attemptmcq(driver, 2);
-            }
-            else if (questype.equals("Coding")) {
-                System.out.println("Coding found");
-                Thread.sleep(1000);
-                Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-                attemptcoding(driver,actions);
-            }
-            else if (questype.equals("Subjective")) {
-                System.out.println("Subjective found");
+    // public static void start(WebDriver driver) throws InterruptedException{
+    //     Actions actions = new Actions(driver);
+    //     Thread.sleep(2000);
+    //     List<WebElement> elements = driver.findElements(By.xpath("//td[@class=\"ant-table-cell question-type\"]"));
+    //     int i = 0;
+    //     System.out.println(elements.size());
+    //     while(i<elements.size()){
+    //         WebElement[] updatedarray = updateElements(driver);
+    //         String questype = updatedarray[i].getText();
+    //         if(questype.equals("MCQ"))
+    //         {
+    //             System.out.println("Mcq found");
+    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+    //             attemptmcq(driver, 2);
+    //         }
+    //         else if (questype.equals("Coding")) {
+    //             System.out.println("Coding found");
+    //             Thread.sleep(1000);
+    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+    //             attemptcoding(driver,actions);
+    //         }
+    //         else if (questype.equals("Subjective")) {
+    //             System.out.println("Subjective found");
                 
-                Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-                attemptsubjective(driver);
-            }
-            else if (questype.equals("Web")) {
-                System.out.println("Web found");
-                Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-                attemptweb(driver, actions);
-            }
-            else if(questype.equals("MQ")) {
-                System.out.println("MQ found");
-                Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
-                attemptMQ(driver);
-            }
-            else{
-                takescreenshot.shot(driver, "queNotFound");
-            }
+    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+    //             attemptsubjective(driver);
+    //         }
+    //         else if (questype.equals("Web")) {
+    //             System.out.println("Web found");
+    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+    //             attemptweb(driver, actions);
+    //         }
+    //         else if(questype.equals("MQ")) {
+    //             System.out.println("MQ found");
+    //             Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+    //             attemptMQ(driver);
+    //         }
+    //         else{
+    //             takescreenshot.shot(driver, "queNotFound");
+    //         }
 
-            i++;
-        }
+    //         i++;
+    //     }
       
-       Basic.clickButton(driver, "//button[normalize-space()=\"Submit Test\"]", Duration.ofSeconds(2));
-       Basic.clickButton(driver, "//button[normalize-space()=\"yes\"]", Duration.ofSeconds(2));
+    //    Basic.clickButton(driver, "//button[normalize-space()=\"Submit Test\"]", Duration.ofSeconds(2));
+    //    Basic.clickButton(driver, "//button[normalize-space()=\"yes\"]", Duration.ofSeconds(2));
 
-       submitfeedback(driver);
+    //    submitfeedback(driver);
+    // }
+
+   
+
+   
+
+
+    
+
+     public static String generateRandomMobileNumber() {
+        Random random = new Random();
+        StringBuilder mobileNumber = new StringBuilder();
+
+        mobileNumber.append(String.format("%03d", random.nextInt(900) + 100)); 
+        mobileNumber.append(String.format("%03d", random.nextInt(900) + 100)); 
+        mobileNumber.append(String.format("%04d", random.nextInt(10000)));     
+
+        return mobileNumber.toString();
     }
 
-    public static void attemptmcq(WebDriver driver , int option) throws InterruptedException
+}
+
+class startTest implements Runnable{
+    WebDriver driver;
+
+    public startTest(WebDriver driver){
+        this.driver= driver;
+    }
+    
+
+    @Override
+    public void run() {
+      Actions actions = new Actions(driver);
+        try 
+        {
+            Thread.sleep(2000);
+            List<WebElement> elements = driver.findElements(By.xpath("//td[@class=\"ant-table-cell question-type\"]"));
+            int i = 0;
+            System.out.println(elements.size());
+            while(i<elements.size())
+            {
+                WebElement[] updatedarray = updateElements(driver);
+                String questype = updatedarray[i].getText();
+                if(questype.equals("MCQ"))
+                {
+                    System.out.println("Mcq found");
+                    Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+                    attemptmcq(driver, 2);
+                }
+                else if (questype.equals("Coding")) {
+                    System.out.println("Coding found");
+                    Thread.sleep(1000);
+                    Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+                    attemptcoding(driver,actions);
+                }
+                else if (questype.equals("Subjective")) {
+                    System.out.println("Subjective found");
+                    
+                    Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+                    attemptsubjective(driver);
+                }
+                else if (questype.equals("Web")) {
+                    System.out.println("Web found");
+                    Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+                    attemptweb(driver, actions);
+                }
+                else if(questype.equals("MQ")) {
+                    System.out.println("MQ found");
+                    Basic.clickButton(driver, "(//td[@class='ant-table-cell question-actions'])[" + (i+1) + "]//a", Duration.ofSeconds(10));
+                    attemptMQ(driver);
+                }
+                else{
+                    takescreenshot.shot(driver, "queNotFound");
+                }
+
+               i++;
+           }
+      
+            Basic.clickButton(driver, "//button[normalize-space()=\"Submit Test\"]", Duration.ofSeconds(2));
+            Basic.clickButton(driver, "//button[normalize-space()=\"yes\"]", Duration.ofSeconds(2));
+
+            submitfeedback(driver);
+
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+    
+     public static void attemptmcq(WebDriver driver , int option) throws InterruptedException
     {
         Basic.clickButton(driver, "(//label[@class=\"ant-radio-wrapper ant-radio-wrapper-in-form-item\"])[" + option + "]//span[2]", Duration.ofSeconds(10));
         Basic.clickButton(driver, "//div[@class=\"submit-mcq-container\"]//button", Duration.ofSeconds(10));
@@ -133,8 +238,8 @@ public class Attempttest {
         System.out.println(successMsg.getText());
         Basic.clickButton(driver, "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]", Duration.ofSeconds(10));
     }
-
-    public static void attemptcoding(WebDriver driver, Actions actions ) throws InterruptedException
+     
+     public static void attemptcoding(WebDriver driver, Actions actions ) throws InterruptedException
     {
            
         Thread.sleep(1000);
@@ -319,8 +424,8 @@ public class Attempttest {
         } 
           
     }
-
-    public static void attemptsubjective(WebDriver driver) throws InterruptedException{
+     
+     public static void attemptsubjective(WebDriver driver) throws InterruptedException{
         Actions actions = new Actions(driver);
         if(Basic.isElementVisible(driver, "//div[@class='ql-editor ql-blank']", Duration.ofSeconds(2)))
         {    
@@ -347,7 +452,7 @@ public class Attempttest {
         WebElement successMsg=Basic.find(driver, "//div[@class='ant-message']", Duration.ofSeconds(10));
         System.out.println(successMsg.getText());
         Basic.clickButton(driver, "//button[@class=\"ant-btn ant-btn-circle ant-btn-text ant-btn-lg ant-btn-icon-only\"]", Duration.ofSeconds(10));
-    }
+    } 
     
     public static void attemptMQ(WebDriver driver) throws InterruptedException{
         Thread.sleep(500);
@@ -755,16 +860,28 @@ public class Attempttest {
         }
         
     }
-    
-     public static String generateRandomMobileNumber() {
-        Random random = new Random();
-        StringBuilder mobileNumber = new StringBuilder();
+ 
+}
 
-        mobileNumber.append(String.format("%03d", random.nextInt(900) + 100)); 
-        mobileNumber.append(String.format("%03d", random.nextInt(900) + 100)); 
-        mobileNumber.append(String.format("%04d", random.nextInt(10000)));     
-
-        return mobileNumber.toString();
+class checkalert implements Runnable{
+    WebDriver driver;
+    public checkalert(WebDriver driver){
+        this.driver= driver;
     }
 
+
+    @Override
+    public void run() {
+        while(!Thread.currentThread().isInterrupted()){
+            System.out.println("Running in parallel");
+
+            if(Basic.isElementVisible(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(1)))
+            {
+                System.out.println(driver.findElement(By.xpath("//div[@class=\"ant-message\"]")).getText() + "Hello World");
+                // takescreenshot.shot(driver, "SignUpError");
+            }
+            
+        }
+    }
+    
 }
