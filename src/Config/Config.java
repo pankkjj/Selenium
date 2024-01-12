@@ -14,9 +14,6 @@ public class Config {
         try(InputStream input = Config.class.getClassLoader().getResourceAsStream("Config/config.properties")){
            Properties prop = new Properties();
            prop.load(input);
-           System.out.println("-------------------------------------------");
-           System.out.println(prop);
-
 
            testlink = prop.getProperty("testLink", "5454545");
            testCode = prop.getProperty("testCode", "45678");

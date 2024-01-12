@@ -24,7 +24,6 @@ public class App {
         String testLink = Config.testlink;
         String testCode = Config.testCode;
         String driverPath =  Config.driverPath;
-        String screenshotPath = Config.screenshotPath;
         System.out.println(driverPath);
             System.setProperty("webdriver.chrome.driver", driverPath);
     
@@ -42,17 +41,18 @@ public class App {
 
             WebDriver driver = new ChromeDriver(options);
             driver.manage().window().maximize();
-            for(int i=237;i<=259;i++){
-            
+            for(int i=332;i<=340;i++)
+            {
+                System.out.println(i+"th shinobi attempting");
                Attempttest.signup(driver, 
                testLink,
                "shinobi" + i +"@gmail.com",
                "Holmes@221",
                testCode,
-               "Shinobi"+i,
-               screenshotPath
+               "Shinobi"+i
                );
             }
+            driver.quit();
        
     }
 

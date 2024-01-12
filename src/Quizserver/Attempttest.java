@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.JavascriptExecutor;
 
 import Basicfunctionalities.Basic;
 import Basicfunctionalities.takescreenshot;
@@ -42,11 +43,11 @@ public class Attempttest {
       
     }
 
-    public static void signup(WebDriver driver, String testlink, String email, String password, String testcode, String name, String screenshotPath) throws InterruptedException
+    public static void signup(WebDriver driver, String testlink, String email, String password, String testcode, String name) throws InterruptedException
     {
         driver.get(testlink);
         Thread.sleep(1000);
-        Basic.clickButton(driver, "//button[normalize-space()=\"sign up\"]", Duration.ofSeconds(10));
+        Basic.clickButton(driver, "//button[normalize-space()=\"sign up\"]", Duration.ofSeconds(4));
         Basic.find(driver, "//input[@id='name']", Duration.ofSeconds(5)).sendKeys(name);
         Basic.find(driver, "//input[@id='email']", Duration.ofSeconds(5)).sendKeys(email);
         Basic.find(driver, "//input[@id='password']", Duration.ofSeconds(5)).sendKeys(password);
@@ -80,6 +81,10 @@ public class Attempttest {
         
         startthread.join();
         alertthread.interrupt();
+        
+        // alertthread.join();
+        System.out.println(startthread.isAlive());
+         System.out.println(alertthread.isAlive());
         
         
     }
@@ -804,30 +809,31 @@ class checkalert implements Runnable{
     WebDriver driver;
     public checkalert(WebDriver driver){
         this.driver= driver;
+        
     }
 
 
     @Override
     public void run() {
         while(true){
-
-            if(Basic.isElementVisible(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(1)))
+            if (Thread.interrupted()) {
+                return ;
+            }
+            if(Basic.isElementVisible(driver, "//div[@class=\"ant-message-custom-content ant-message-error\"]", Duration.ofSeconds(1)))
             {
-                   
-                if(Basic.find(driver, "//div[@class=\"ant-message\"]", Duration.ofSeconds(1)).getText().length()>1){
-                    System.out.println("content found in alert");
-                    try {
-                        Thread.sleep(1000);
+
+                takescreenshot.shot(driver, "Alert found");
+                try {
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                      
                         e.printStackTrace();
                     }
-                    takescreenshot.shot(driver, "Alert found");
-                };
+                
                 
             }
             
         }
     }
-    
+  
 }
