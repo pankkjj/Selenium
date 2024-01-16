@@ -40,6 +40,16 @@ public class Attempttest {
             Basic.clickButton(driver, "//button[normalize-space()=\"start test\"]", Duration.ofSeconds(10));
         }
         // start(driver);
+        startTest st = new startTest(driver);
+        checkalert ca = new checkalert(driver);
+        Thread startthread = new Thread(st);   
+        Thread alertthread = new Thread(ca);
+  
+        startthread.start();
+        alertthread.start();    
+        
+        startthread.join();
+        alertthread.interrupt();
       
     }
 
