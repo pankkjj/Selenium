@@ -41,15 +41,15 @@ public class App {
 
             WebDriver driver = new ChromeDriver(options);
             driver.manage().window().maximize();
-            for(int i=332;i<=340;i++)
+            for(int i=1;i<=5;i++)
             {
                 System.out.println(i+"th shinobi attempting");
                Attempttest.signup(driver, 
                testLink,
-               "shinobi" + i +"@gmail.com",
+               "shinobi"+ i+"@gmail.vvv",
                "Holmes@221",
                testCode,
-               "Shinobi"+i
+               "shinobi"+ i
                );
             }
             driver.quit();
