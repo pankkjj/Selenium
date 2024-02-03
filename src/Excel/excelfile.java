@@ -35,7 +35,7 @@ public class excelfile {
 
             while(cellIterator.hasNext()){
                 Cell cell = cellIterator.next();
-                switch(cell.getCellTypeEnum()){
+                switch(cell.getCellType()){
                 
                     case STRING:
                         System.out.print(cell.getStringCellValue()+"\t\t");
@@ -140,7 +140,7 @@ public class excelfile {
                 Cell cell1 = cellitr1.next();
                 Cell cell2 = cellitr2.next();
                 Cell cell3 = mainrow.createCell(cellcount++);
-                switch (cell1.getCellTypeEnum()) {
+                switch (cell1.getCellType()) {
                     case STRING:
                         System.out.println(cell1.getStringCellValue());
                         cell3.setCellValue(cell1.getStringCellValue());
@@ -152,7 +152,7 @@ public class excelfile {
                         break;
                 }
                 Cell cell4 = mainrow.createCell(cellcount++);
-                switch (cell2.getCellTypeEnum()) {
+                switch (cell2.getCellType()) {
                     case STRING:
                         System.out.println(cell2.getStringCellValue());
                         cell4.setCellValue(cell2.getStringCellValue());

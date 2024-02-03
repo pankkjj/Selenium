@@ -12,7 +12,7 @@ public class Login {
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
       
         
-        driver.get("https://cqtestga.com/login");
+        // driver.get("https://cqtestga.com/login");
         
         driver.switchTo().frame(0);
         driver.findElement(By.id("email")).clear();

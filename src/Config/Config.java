@@ -10,20 +10,28 @@ public class Config {
     public static String screenshotPath;
     public static String autoitPath;
     public static String scriptPath;
+    public static String mainFilePath;
+    public static String mcqFilePath;
+    public static String codingFilePath;
+    public static String subFilePath;
+    public static String webFilePath;
     static{
         try(InputStream input = Config.class.getClassLoader().getResourceAsStream("Config/config.properties")){
            Properties prop = new Properties();
            prop.load(input);
 
-           testlink = prop.getProperty("testLink", "5454545");
-           testCode = prop.getProperty("testCode", "45678");
-           driverPath = prop.getProperty("driverpath","gfhgfhg");
-           screenshotPath = prop.getProperty("ScreenshotPath","uhhj");
-           autoitPath = prop.getProperty("autoitPath","uhhj");
-           scriptPath = prop.getProperty("scriptpath", "dsgfrdgf");
-           System.out.println(testlink);
+           testlink = prop.getProperty("testLink", "empty");
+           testCode = prop.getProperty("testCode", "empty");
+           driverPath = prop.getProperty("driverpath","empty");
+           screenshotPath = prop.getProperty("ScreenshotPath","empty");
+           autoitPath = prop.getProperty("autoitPath","empty");
+           scriptPath = prop.getProperty("scriptpath", "empty");
+           mainFilePath = prop.getProperty("mainFilePath","empty");
+           mcqFilePath = prop.getProperty("mcqFilePath","empty");
+           codingFilePath = prop.getProperty("codingFilePath", "empty");
+           subFilePath = prop.getProperty("subFilePath", "empty");
+           webFilePath = prop.getProperty("webFilePath", "empty");
         } catch(Exception e){
-           System.out.println("-------------------------------------------");
            System.out.println(e);
         }
     }
