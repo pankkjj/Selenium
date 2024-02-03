@@ -63,18 +63,19 @@ public class GetQuestions {
       }};
       int count = 2;
       List<WebElement> sections = driver.findElements(By.xpath("//div[@class ='sections']"));
-      for(int i=1; i<=sections.size();i++){
+      for(int i=1; i<=sections.size();i++)
+      {
          Basic.clickButton(driver, "(//div[contains(@class, 'sections-head')])[" + i +"]", Duration.ofSeconds(5));
          Thread.sleep(500);
          List<WebElement> questionsList = driver.findElements(By.xpath("(//div[@class ='sections'])["+ i + "]//div[@class='row draggable-content-element table-body  ']"));
          
          WebElement[] questions = questionsList.toArray(new WebElement[0]);
-         count = setToMap(data, questions,driver,count,i);
+         count = setToMap(data, questions, driver, count, i);
          count++;
 
       }
       
-      writeToSheet(data, wb, sheet,mainFilePath);
+      writeToSheet(data, wb, sheet, mainFilePath);
      
    }
 
@@ -219,9 +220,25 @@ public class GetQuestions {
            webObj = addValueToArray(webObj, lang);
            
            List<WebElement> testcases = driver.findElements(By.xpath("//div[@class=\"code-option code-option-loop\"]"));
-           String testcase = "";
-           for(WebElement element : testcases){
-             
+           String tcDesc = "";
+           String tcEvaluator = "";
+           String tcScore = "";
+           int j=1;
+           for(WebElement element : testcases)
+           {
+             tcDesc = Basic.find(driver,
+              "(//div[@class=\"code-option code-option-loop\"])["+ j +"]//div[@class='col-4 input-box input-box-2']",
+               Duration.ofSeconds(5)).getText();
+             tcEvaluator = Basic.find(driver,
+              "(//div[@class=\"code-option code-option-loop\"])["+ j +"]//div[@class='col-4 input-box']",
+              Duration.ofSeconds(5)).getText();
+             tcScore = Basic.find(driver,
+              "(//div[@class=\"code-option code-option-loop\"])["+ j +"]//div[@class='col-1 input-box input-box-3']//input",
+               Duration.ofSeconds(5)).getAttribute("value");
+             webObj = addValueToArray(webObj, tcDesc);
+             webObj = addValueToArray(webObj, tcEvaluator);
+             webObj = addValueToArray(webObj, tcScore);
+             j++;
            }
 
            webMap.put(webCount.toString(),webObj);
@@ -268,10 +285,11 @@ public class GetQuestions {
             rowcount++;
             
          }
+         wb.close();
+
       }catch(Exception e){
          System.out.println(e);
       }
-      
       XSSFWorkbook mcqwb = new XSSFWorkbook();
       XSSFSheet mcqsheet = mcqwb.createSheet("Mcq details");
       writeToSheet(McqMap, mcqwb, mcqsheet, mcqFilePath);
