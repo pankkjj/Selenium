@@ -31,7 +31,7 @@ public class GetQuestions {
    }};
 
    static Map<String, Object[]> codingMap = new TreeMap<String ,Object[]>(){{
-    put("1",new Object[]{"Name", "Score", "Keywords", "Description", "Languages Allowed"});
+    put("1",new Object[]{"Name", "Score", "Keywords", "Description", "Languages Allowed", "Test Case Name", "Test Case Input", "Test Case Output", "Test Case Score", "Sample Test Case"});
    }};
 
    static Map<String, Object[]> subjectiveMap = new TreeMap<String,Object[]>(){{
@@ -39,7 +39,7 @@ public class GetQuestions {
    }};
 
    static Map<String,Object[]> webMap = new TreeMap<String, Object[]>(){{
-      put("1",new Object[]{"Name", "Score", "Keywords", "Description", "Languages Allowed"});
+      put("1",new Object[]{"Name", "Score", "Keywords", "Description", "Languages Allowed" , "Test Case Description", "Test Case Evaluator","Test Case Score"});
    }};
 
    static Integer mcqCount = 2;
@@ -110,7 +110,6 @@ public class GetQuestions {
           ).getText() ;
  
           String questionID = questions[i].getAttribute("id");
-          System.out.println(questionTitle);
           data.put(count.toString(),new Object[]{questionTitle, questionID, questionNumber, questionType, questionScore});
           count++;
         }
@@ -195,10 +194,33 @@ public class GetQuestions {
              McqMap.put(mcqCount.toString(),obj);
              mcqCount++;
              break;
+             
 
          case "Coding":
            String languages = Basic.find(driver, "//button[@data-id='progLang']", Duration.ofSeconds(5)).getAttribute("title");
-           codingMap.put(codingCount.toString(), new Object[]{questionName,score,keyword,desc,languages});
+           Object[] codingObj = new Object[]{questionName,score,keyword,desc,languages};
+
+           Basic.clickButton(driver, "//div[@id='tCases']",  Duration.ofSeconds(5));
+           Thread.sleep(2000);
+           List <WebElement> elements = driver.findElements(By.xpath("//table[@class='table testcase-showcase-table']//tbody//tr"));
+           for(int count=0;count<elements.size();count++){
+              Basic.clickButton(driver,"//table[@class='table testcase-showcase-table']//tbody//tr["+ (count+1) +"]//td[@class='actions-col']//span[1]",Duration.ofSeconds(5));
+              String tcName = Basic.find(driver, "//input[@id='testCaseName']", Duration.ofSeconds(5)).getDomProperty("value");
+              String tcScore = Basic.find(driver, "//input[@id='testCaseScore']", Duration.ofSeconds(5)).getDomProperty("value");
+              String tcInput = Basic.find(driver, "//textarea[@id='testcaseInput']", Duration.ofSeconds(5)).getDomProperty("value");
+              String tcOutput = Basic.find(driver, "//textarea[@id='testcaseOutput']", Duration.ofSeconds(5)).getDomProperty("value");
+              String sampleTc = Basic.find(driver, "//input[@id='sampleTestCaseCheck']", Duration.ofSeconds(5)).isSelected()?"yes":"no";
+              Thread.sleep(500);
+              Basic.clickButton(driver, "//button[@class='close']", Duration.ofSeconds(5));
+              codingObj = addValueToArray(codingObj, tcName);
+              codingObj = addValueToArray(codingObj, tcInput);
+              codingObj = addValueToArray(codingObj, tcOutput);
+              codingObj = addValueToArray(codingObj, tcScore);
+              codingObj = addValueToArray(codingObj, sampleTc);
+
+              
+           }
+           codingMap.put(codingCount.toString(), codingObj);
            codingCount++;
            break; 
            
