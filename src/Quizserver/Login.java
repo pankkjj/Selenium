@@ -12,7 +12,7 @@ public class Login {
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
       
         
-        // driver.get("https://cqtestga.com/login");
+        driver.get("https://codequotient.com/login");
         
         driver.switchTo().frame(0);
         driver.findElement(By.id("email")).clear();
@@ -26,7 +26,7 @@ public class Login {
         if(Basic.isElementVisible(driver, "//div[@id='myModal-alert-only']", Duration.ofSeconds(10)))
         {
             WebElement errmsg=driver.findElement(By.xpath("//p[@id='alert-text']"));
-            System.out.println( errmsg.getText());
+            System.out.println( "error message  "+errmsg.getText());
         } 
 
     }

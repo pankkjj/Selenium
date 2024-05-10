@@ -25,7 +25,6 @@ import Basicfunctionalities.Basic;
 import Quizserver.Login;
 
 public class GetQuestions {
-    	
    static Map<String, Object[]> McqMap = new TreeMap<String,Object[]>(){{
     put("1",new Object[]{"Name","Score","Keywords","Description","Options"});
    }};
@@ -54,7 +53,7 @@ public class GetQuestions {
    
    public static void getQuestions(WebDriver driver,String link) throws InterruptedException{
       driver.get(link);
-      Login.login(driver, "pankaj.thakur@codequotient.com", "Holmes@221");
+      Login.login(driver, "pankaj.thakur@codequotient.com", "Codequotient@1");
 
       XSSFWorkbook wb = new XSSFWorkbook();
       XSSFSheet sheet = wb.createSheet("Questions details");
@@ -153,7 +152,8 @@ public class GetQuestions {
    
    public static void getQuestionDetails(WebDriver driver, String id) throws InterruptedException
    {
-      driver.get("https://cqtestga.com/quest/add/id:"+id);
+      driver.get("https://codequotient.com/quest/add/"+id);
+
       String questionName = Basic.find(driver, "//div[@class='edit-question-name']//input", Duration.ofSeconds(5)).getAttribute("value");
       String score = Basic.find(driver, "//div[@class='col-2']//input", Duration.ofSeconds(0)).getAttribute("value");
       String questionType = Basic.find(driver, "//button[@class='btn dropdown-toggle disabled btn-light']", Duration.ofSeconds(5)).getAttribute("title");
@@ -170,7 +170,10 @@ public class GetQuestions {
       for (WebElement webElement : descriptionList) {
          desc = desc + webElement.getText();
       }
-
+      WebElement pretag = Basic.find(driver, "//div[@class='ql-editor']//pre", Duration.ofSeconds(1));
+      if(pretag != null){
+         desc = desc + pretag.getText();
+      }
 
       switch(questionType){
          case "MCQ":
@@ -267,7 +270,21 @@ public class GetQuestions {
            webCount++;
            break;
       }
+      XSSFWorkbook mcqwb = new XSSFWorkbook();
+      XSSFSheet mcqsheet = mcqwb.createSheet("Mcq details");
+      writeToSheet(McqMap, mcqwb, mcqsheet, mcqFilePath);
+
+      XSSFWorkbook codingwb = new XSSFWorkbook();
+      XSSFSheet codingsheet = codingwb.createSheet("Coding details");
+      writeToSheet(codingMap, codingwb, codingsheet, codingFilePath);
+
+      XSSFWorkbook subwb = new XSSFWorkbook();
+      XSSFSheet subsheet = subwb.createSheet("Subjective Details");
+      writeToSheet(subjectiveMap, subwb, subsheet, subFilePath);
       
+      XSSFWorkbook webwb = new XSSFWorkbook();
+      XSSFSheet websheet = webwb.createSheet("Web Details");
+      writeToSheet(webMap, webwb, websheet, webFilePath);
        
    }
 
